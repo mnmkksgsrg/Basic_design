@@ -64,9 +64,11 @@ resource "aws_security_group" "allow_web_traffic" {
   }
 }
 
+#aws_vpc_security...となるのは過去の仕様変更と区別し、明示的にVPCとの関連付けを示すため
+#vpc_cidrを使うのではなく、aws_vpc.this.cidr_blockで参照するのは、リソースの依存関係を示すため
 resource "aws_vpc_security_group_ingress_rule" "allow_HTTP_ipv4" {
   security_group_id = aws_security_group.allow_web_traffic.id
-  cidr_ipv4         = aws_vpc_this.cidr_block
+  cidr_ipv4         = aws_vpc.this.cidr_block
   from_port         = 443
   ip_protocol       = "tcp"
   to_port           = 443
@@ -74,7 +76,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_HTTP_ipv4" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_HTTP_ipv6" {
   security_group_id = aws_security_group.allow_web_traffic.id
-  cidr_ipv6         = aws_vpc_this.ipv6_cidr_block
+  cidr_ipv6         = aws_vpc.this.ipv6_cidr_block
   from_port         = 443
   ip_protocol       = "tcp"
   to_port           = 443
@@ -82,7 +84,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_HTTP_ipv6" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_HTTPS_ipv4" {
   security_group_id = aws_security_group.allow_web_traffic.id
-  cidr_ipv4         = aws_vpc_this.cidr_block
+  cidr_ipv4         = aws_vpc.this.cidr_block
   from_port         = 80
   ip_protocol       = "tcp"
   to_port           = 80
@@ -90,7 +92,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_HTTPS_ipv4" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow_HTTPS_ipv6" {
   security_group_id = aws_security_group.allow_web_traffic.id
-  cidr_ipv6         = aws_vpc_this.ipv6_cidr_block
+  cidr_ipv6         = aws_vpc.this.ipv6_cidr_block
   from_port         = 80
   ip_protocol       = "tcp"
   to_port           = 80
