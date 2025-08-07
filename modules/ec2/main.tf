@@ -8,10 +8,10 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "virtualization-type"
-    valies = ["hvm"]
+    values = ["hvm"]
   }
 
-  owners = ["09972019477"]
+  owners = ["099720109477"]
 }
 
 resource "aws_instance" "wordpress" {
