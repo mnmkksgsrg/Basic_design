@@ -1,0 +1,22 @@
+data "aws_ami" "ubuntu" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    valies = ["hvm"]
+  }
+
+  owners = ["09972019477"]
+}
+
+resource "aws_instance" "wordpress" {
+  ami           = data.aws_ami.ubuntu.id
+  instance_type = "t3.micro"
+}
+
+
