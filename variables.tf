@@ -13,9 +13,9 @@ variable "azs" {
   type        = list(string)
 }
 
-variable "public_subnet_cidrs" {
+variable "public_subnet_cidr" {
   description = "パブリックサブネットのCIDRブロックのリスト"
-  type        = list(string)
+  type        = string
 }
 
 variable "private_subnet_cidrs" {

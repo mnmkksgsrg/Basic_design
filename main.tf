@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "./module/vpc"
+  source = "./modules/vpc"
 
   vpc_name            = var.vpc_name
   vpc_cidr            = var.vpc_cidr
@@ -8,7 +8,7 @@ module "vpc" {
 }
 
 module "ec2" {
-  source = "./module/ec2"
+  source = "./modules/ec2"
 
   ami_most_recent     = var.ec2_ami_most_recent         
   ami_name_pattern    = var.ec2_ami_name_pattern
@@ -16,18 +16,18 @@ module "ec2" {
   ami_owners          = var.ec2_ami_owners
   instance_type       = var.ec2_instance_type
   subnet_id           = module.vpc.public_subnet_ids[0]
-  security_group_ids  = [module.vpc.web_security_group_id]
+  security_group_ids  = [module.vpc.default_security_group_id]
   name_tag            = var.ec2_name_tag
   associate_public_ip = var.ec2_associate_public_ip
   key_name            = var.ec2_key_name
 }
 
 module "rds" {
-  source = "./module/rds"
+  source = "./modules/rds"
 
   vpc_id             = module.vpc.vpc_id
-  private_subnet_ids = module.vpc.private_subnet_id
-  allowed_app_sg_ids = [module.vpc.web_security_group_id]
+  private_subnet_ids = module.vpc.private_subnet_ids
+  allowed_app_sg_ids = [module.vpc.default_security_group_id]
   vpc_name           = var.vpc_name
   db_name            = var.db_name
   username           = var.db_username
