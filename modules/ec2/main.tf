@@ -1,22 +1,28 @@
 data "aws_ami" "ubuntu" {
-  most_recent = true
+  most_recent = var.ami_most_recent
 
   filter {
     name   = "name"
-    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+    values = var.ami_name_pattern
   }
 
   filter {
     name   = "virtualization-type"
-    values = ["hvm"]
+    values = var.virtualization_type
   }
 
-  owners = ["099720109477"]
+  owners = var.ami_owners
 }
 
 resource "aws_instance" "wordpress" {
   ami           = data.aws_ami.ubuntu.id
-  instance_type = "t3.micro"
+  instance_type = var.instance_type
+
+  tags = {
+    Name = "wordpress"
+  }
 }
+
+
 
 
