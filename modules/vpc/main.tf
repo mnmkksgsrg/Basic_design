@@ -16,11 +16,14 @@ resource "aws_subnet" "public" {
 }
 
 resource "aws_subnet" "private" {
+  for_each = toset(var.azs)
+  
   vpc_id     = aws_vpc.this.id
-  cidr_block = var.private_subnet_cidr
+  cidr_block = var.private_subnet_cidrs[lookup(each.value, index(var.azs, each.key))]
+  availability_zone = each.value
 
   tags = {
-    Name = "${var.vpc_name}_private_subnet"
+    Name = "${var.vpc_name}_private_subnet_${each.value}"
   }
 }
 

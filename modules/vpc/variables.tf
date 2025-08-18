@@ -1,19 +1,25 @@
-variables "vpc_name" {
+variable "vpc_name" {
   description = "VPC名"
   type = string
 }
 
-variables "vpc_cidr" {
+variable "vpc_cidr" {
   description = "VPCのCIDRブロック"
   type = string
 }
 
-variables "public_subnet_cidr" {
+variable "public_subnet_cidr" {
   description = "パブリックサブネットのCIDRブロック"
   type = string
 }
 
-variables "private_subnet_cidr" {
+variable "private_subnet_cidrs" {
   description = "プライベートサブネットのCIDRブロック"
-  type = string
+  type = list(string)
 }
+
+variable "azs" {
+  description = "AZのリスト"
+  type = list(string)
+}
+
