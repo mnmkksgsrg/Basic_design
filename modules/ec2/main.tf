@@ -3,26 +3,26 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name   = "name"
-    values = var.ami_name_pattern
+    values = [var.ami_name_pattern]
   }
 
   filter {
     name   = "virtualization-type"
-    values = var.virtualization_type
+    values = [var.ami_virtualization_type]
   }
 
   owners = var.ami_owners
 }
 
 resource "aws_instance" "wordpress" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
+  ami                    = data.aws_ami.ubuntu.id
+  instance_type          = var.instance_type
+  subnet_id              = var.subnet_id
+  vpc_security_group_ids = var.security_group_ids
+  key_name               = var.key_name
 
   tags = {
-    Name = "wordpress"
+    Name = var.name
   }
 }
-
-
-
 

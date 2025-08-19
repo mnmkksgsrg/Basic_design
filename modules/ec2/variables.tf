@@ -1,36 +1,52 @@
 variable "ami_most_recent" {
   description = "最新のamiを使用するか"
   type        = bool
-  default     = true
+  default = true
 }
 
 variable "ami_name_pattern" {
   description = "AMIの名前パターン"
   type        = string
-  default     = "ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"
+  default = "amzn2-ami-hvm-*-x86_64-gp2"
 }
 
 variable "ami_virtualization_type" {
   description = "AMIの仮想化タイプ"
   type        = string
-  default     = "hvm"
+  default = "hvm"
 }
 
 variable "ami_owners" {
   description = "ownerのID"
   type        = list(string)
-  default     = ["099720109477"]
+  default = ["amazon"]
 }
 
 variable "instance_type" {
   description = "インスタンスタイプ"
   type        = string
-  default     = "t3.micro"
+  default = "t3.micro"
 }
 
+variable "key_name" {
+  description = "EC2インスタンスで使用するキーペア名"
+  type        = string
+  default = ""
+}
 
+variable "subnet_id" {
+  description = "EC2を配置するサブネットID"
+  type        = string
+}
 
+variable "security_group_ids" {
+  description = "EC2インスタンスに付与するセキュリティグループIDのリスト"
+  type        = list(string)
+  default = []
+}
 
-
-
+variable "name" {
+  description = "EC2インスタンス名（Nameタグ）"
+  type        = string
+}
 

@@ -1,36 +1,37 @@
 output "vpc_id" {
-  description = "VPC ID"
+  description = "VPCのID"
   value       = aws_vpc.this.id
 }
 
 output "vpc_cidr_block" {
-  description = "VPC CIDR"
+  description = "VPCのCIDR"
   value       = aws_vpc.this.cidr_block
 }
 
-output "public_subnet_id" {
-  description = "Public subnet ID"
-  value       = aws_subnet.public.id
+output "public_subnet_ids" {
+  description = "パブリックサブネットのID"
+  value       = {
+    for az, subnet in aws_subnet.public : az => subnet.id
+  }
 }
 
 output "private_subnet_ids" {
-  description = "Private subnet IDs"
-  value       = aws_subnet.private[*].id
+  description = "プライベートサブネットのID"
+  value       = [for s in aws_subnet.private : s.id]
 }
 
 output "internet_gateway_id" {
-  description = "Internet Gateway ID"
+  description = "インターネットGWのID"
   value       = aws_internet_gateway.this.id
 }
 
-# もし route table を public/private で分けない設計なら、この1つだけでもOK
-output "route_table_id" {
-  description = "Route table ID"
-  value       = aws_route_table.this.id
+output "public_route_table_id" {
+  description = "パブリックルートテーブルのID"
+  value       = aws_route_table.public.id
 }
 
-output "web_security_group_id" {
-  description = "Allow web (HTTP/HTTPS) SG"
-  value       = aws_security_group.allow_web_traffic.id
+output "private_route_table_id" {
+  description = "プライベートルートテーブルのID"
+  value       = aws_route_table.private.id
 }
 

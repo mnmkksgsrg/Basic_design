@@ -1,4 +1,6 @@
 terraform {
+  required_version = ">= 1.8.0"
+
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -8,7 +10,8 @@ terraform {
 }
 
 provider "aws" {
-  region = "ap-east-1"
+  region = "ap-northeast-1"
+
   default_tags {
     tags = {
       Project = "wordpress"
