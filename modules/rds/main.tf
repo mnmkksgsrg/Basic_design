@@ -8,24 +8,6 @@ resource "aws_db_subnet_group" "this" {
   )
 }
 
-resource "aws_security_group" "rds" {
-  name        = "${var.name}_rds_sg"
-  description = "rds_sg"
-  vpc_id      = var.vpc_id
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = merge(
-    var.tags,
-    { Name = "${var.name}_rds_sg" }
-  )
-}
-
 resource "aws_db_instance" "this" {
   allocated_storage               = var.allocated_storage
   storage_type                    = var.storage_type
