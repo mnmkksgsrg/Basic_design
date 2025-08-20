@@ -1,7 +1,7 @@
 variable "vpc_name" {
   description = "VPC名"
   type        = string
-  default     = "wordpress-vpc"
+  default     = "basic_vpc"
 }
 
 variable "vpc_cidr" {
@@ -53,7 +53,7 @@ variable "ec2_instance_type" {
 variable "ec2_name_tag" {
   description = "EC2インスタンスの名前タグ"
   type        = string
-  default     = "wordpress-web"
+  default     = "basic_ec2"
 }
 
 variable "ec2_associate_public_ip" {
@@ -70,13 +70,13 @@ variable "ec2_key_name" {
 variable "db_name" {
   description = "RDSインスタンスのデータベース名"
   type        = string
-  default     = "wordpress"
+  default     = "basic_rds"
 }
 
 variable "db_username" {
   description = "RDSインスタンスのユーザー名"
   type        = string
-  default     = "wpadmin"
+  default     = "mnmkksgsrg"
 }
 
 variable "db_password" {
