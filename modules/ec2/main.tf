@@ -14,7 +14,7 @@ data "aws_ami" "ubuntu" {
   owners = var.ami_owners
 }
 
-resource "aws_instance" "wordpress" {
+resource "aws_instance" "basic" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.instance_type
   subnet_id              = var.subnet_id
