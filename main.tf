@@ -61,7 +61,7 @@ module "ec2" {
 module "rds" {
   source = "./modules/rds"
 
-  name                    = "wordpress"
+  name                    = "basic"
   vpc_id                  = module.vpc.vpc_id
   db_subnet_ids           = module.vpc.private_subnet_ids
   vpc_security_group_ids  = []
@@ -76,7 +76,7 @@ module "rds" {
   kms_key_id              = var.kms_key_id
 
   tags = {
-    Name = "wordpress_db"
+    Name = "basic_db"
   }
 }
 
