@@ -7,7 +7,6 @@ locals {
       cidr_block = "10.0.1.0/24"
     }
   }
-
   private_subnets = {
     "ap-northeast-1a" = {
       cidr_block = "10.0.10.0/24"
@@ -25,23 +24,6 @@ module "vpc" {
   vpc_cidr        = var.vpc_cidr
   public_subnets  = local.public_subnets
   private_subnets = local.private_subnets
-}
-
-resource "aws_security_group" "app" {
-  name        = "${var.vpc_name}_app_sg"
-  description = "app_sg"
-  vpc_id      = module.vpc.vpc_id
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "${var.vpc_name}_app_sg"
-  }
 }
 
 module "ec2" {
@@ -79,12 +61,3 @@ module "rds" {
     Name = "basic_db"
   }
 }
-
-resource "aws_vpc_security_group_ingress_rule" "app_to_rds" {
-  security_group_id            = module.rds.db_security_group_id
-  referenced_security_group_id = aws_security_group.app.id
-  from_port                    = 3306
-  to_port                      = 3306
-  ip_protocol                  = "tcp"
-}
-
