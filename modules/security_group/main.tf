@@ -42,7 +42,7 @@ resource "aws_security_group" "rds" {
   }
 }
 
-resource "aws_vpc_security_group_ingress_rule" "app_to_rds" {
+resource "aws_vpc_security_group_ingress_rule" "ec2_to_rds" {
   security_group_id            = aws_security_group.rds.id
   referenced_security_group_id = aws_security_group.web.id
   from_port                    = 3306
