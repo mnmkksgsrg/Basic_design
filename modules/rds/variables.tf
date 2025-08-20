@@ -80,18 +80,6 @@ variable "backup_retention_period" {
   default = 7
 }
 
-variable "preferred_backup_window" {
-  description = "バックアップ時間帯"
-  type        = string
-  default = "03:00-04:00"
-}
-
-variable "preferred_maintenance_window" {
-  description = "メンテナンス時間帯"
-  type        = string
-  default = "Mon:04:00-Mon:05:00"
-}
-
 variable "skip_final_snapshot" {
   description = "削除時に最終スナップショットをスキップ"
   type        = bool
