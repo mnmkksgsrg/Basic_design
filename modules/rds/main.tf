@@ -25,7 +25,7 @@ resource "aws_db_instance" "this" {
   storage_encrypted               = var.storage_encrypted
   kms_key_id                      = var.kms_key_id
   db_subnet_group_name            = aws_db_subnet_group.this.name
-  vpc_security_group_ids          = compact(concat([aws_security_group.rds.id], var.vpc_security_group_ids))
+  vpc_security_group_ids          = compact(concat([aws_security_group.rds.id], var.vpc_security_group_ids)) #確認
   skip_final_snapshot             = var.skip_final_snapshot
 
   tags = merge(
