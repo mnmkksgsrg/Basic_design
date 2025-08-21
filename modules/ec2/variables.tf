@@ -39,9 +39,9 @@ variable "subnet_id" {
   type        = string
 }
 
-variable "web_security_group_id" {
+variable "security_group_ids" {
   description = "EC2インスタンスに付与するセキュリティグループID"
-  type        = string
+  type        = list(string)
   default = []
 }
 
