@@ -11,13 +11,14 @@ output "vpc_cidr_block" {
 output "public_subnet_ids" {
   description = "パブリックサブネットのID"
   value       = {
-    for az, subnet in aws_subnet.public : az => subnet.id
+    for s in aws_subnet.public : s.availavility_zone => s.id
   }
 }
 
 output "private_subnet_ids" {
   description = "プライベートサブネットのID"
-  value       = [for s in aws_subnet.private : s.id]
+  value       = {
+    for s in aws_subnet.private : s.availavility_zone => s.id]
 }
 
 output "internet_gateway_id" {
