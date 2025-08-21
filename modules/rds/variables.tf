@@ -13,9 +13,9 @@ variable "db_subnet_ids" {
   type        = list(string)
 }
 
-variable "rds_security_group_id" {
+variable "vpc_security_group_ids" {
   description = "RDSに付与する追加セキュリティグループID"
-  type        = string
+  type        = list(string)
   default = []
 }
 
