@@ -35,7 +35,7 @@ module "ec2" {
   ami_owners              = var.ec2_ami_owners
   instance_type           = var.ec2_instance_type
   subnet_id               = module.vpc.public_subnet_ids["ap-northeast-1a"]
-  security_group_ids      = [aws_security_group.app.id]
+  security_group_ids      = [module.security_group.web_id]
   name                    = var.ec2_name_tag
   key_name                = var.ec2_key_name
 }
@@ -45,8 +45,11 @@ module "rds" {
 
   name                    = "basic"
   vpc_id                  = module.vpc.vpc_id
-  db_subnet_ids           = module.vpc.private_subnet_ids
-  vpc_security_group_ids  = []
+  subnet_ids           = [
+    module.vpc.private_subnet_ids["ap-northeast-1a"]
+    module.vpc.private_subnet_ids["ap-northeast-1c"]
+  ]
+  vpc_security_group_ids  = [module.security_group.rds_id]
   db_name                 = var.db_name
   db_username             = var.db_username
   db_password             = var.db_password
@@ -59,5 +62,9 @@ module "rds" {
 
   tags = {
     Name = "basic_db"
+  }
+  module "security_group" {
+    source = "./modules/security_droup"
+    vpc_id = module.vpc.vpc_id
   }
 }
