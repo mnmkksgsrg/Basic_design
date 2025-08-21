@@ -5,5 +5,5 @@ variable "vpc_name" {
 
 variable "vpc_id" {
   type        = string
-  description = "VPCのID
+  description = "VPCのID"
 }

@@ -33,7 +33,7 @@ resource "aws_vpc_security_group_egress_rule" "allow_all_traffic_web" {
 }
 
 resource "aws_security_group" "rds" {
-  name        = "${var.name}_rds_security_group"
+  name        = "${var.vpc_name}_rds_security_group"
   description = "rdsのセキュリティグループ"
   vpc_id      = var.vpc_id
 

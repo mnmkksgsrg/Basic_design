@@ -28,8 +28,3 @@ output "db_subnet_group_name" {
   value       = aws_db_subnet_group.this.name
 }
 
-output "rds_security_group_id" {
-  description = "RDS用セキュリティグループID"
-  value       = aws_security_group.rds.id
-}
-

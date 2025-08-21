@@ -1,3 +1,9 @@
+variable "project" {
+  description = "PJ名"
+  type = string
+  default = "basic"
+}
+
 variable "name" {
   description = "RDS名のプレフィックス"
   type        = string
