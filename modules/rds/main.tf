@@ -1,10 +1,10 @@
 resource "aws_db_subnet_group" "this" {
-  name       = "${var.name}_db_subnet_group"
-  subnet_ids = var.db_subnet_ids
+  name       = "${var.project}_db_subnet_group"
+  subnet_ids = var.subnet_ids
 
   tags = merge(
     var.tags,
-    { Name = "${var.name}_db_subnet_group" }
+    { Name = "${var.project}_db_subnet_group" }
   )
 }
 
@@ -25,7 +25,7 @@ resource "aws_db_instance" "this" {
   storage_encrypted               = var.storage_encrypted
   kms_key_id                      = var.kms_key_id
   db_subnet_group_name            = aws_db_subnet_group.this.name
-  vpc_security_group_ids          = compact(concat([aws_security_group.rds.id], var.vpc_security_group_ids)) #確認
+  vpc_security_group_ids          = var.vpc_security_group_ids
   skip_final_snapshot             = var.skip_final_snapshot
 
   tags = merge(
