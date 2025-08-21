@@ -1,7 +1,7 @@
 resource "aws_security_group" "web" {
   name        = "${var.vpc_name}_web_security_group"
   description = "webサーバーのセキュリティグループ"
-  vpc_id      = module.vpc.vpc_id
+  vpc_id      = var.vpc_id
 
   tags = {
     Name = "${var.vpc_name}_web_security_group"
