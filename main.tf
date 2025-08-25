@@ -1,4 +1,3 @@
-#aa
 locals {
   public_subnets = {
     "ap-northeast-1a" = {
