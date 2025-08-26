@@ -1,52 +1,24 @@
-locals {
-  public_subnets = {
-    "ap-northeast-1a" = {
-      cidr_block = "10.0.0.0/24"
-    }
-    "ap-northeast-1c" = {
-      cidr_block = "10.0.1.0/24"
-    }
-  }
-  private_subnets = {
-    "ap-northeast-1a" = {
-      cidr_block = "10.0.10.0/24"
-    }
-    "ap-northeast-1c" = {
-      cidr_block = "10.0.11.0/24"
-    }
-  }
-}
-
 module "vpc" {
   source = "./modules/vpc"
 
   vpc_name        = var.vpc_name
   vpc_cidr        = var.vpc_cidr
-  public_subnets  = local.public_subnets
-  private_subnets = local.private_subnets
+  public_subnets  = var.public_subnets
+  private_subnets = var.private_subnets
 }
 
 module "ec2" {
   source = "./modules/ec2"
 
-  ami_most_recent         = var.ec2_ami_most_recent
-  ami_name_pattern        = var.ec2_ami_name_pattern
-  ami_virtualization_type = var.ec2_virtualization_type
-  ami_owners              = var.ec2_ami_owners
-  instance_type           = var.ec2_instance_type
-  subnet_id               = module.vpc.public_subnet_ids["ap-northeast-1a"]
-  security_group_ids      = [module.security_group.web_security_group_id]
-  ec2_name                = var.ec2_name
-  key_name                = var.ec2_key_name
+  subnet_id          = values(module.vpc.public_subnet_ids)[0]
+  security_group_ids = [module.security_group.web_security_group_id]
+  ec2_name           = var.ec2_name
 }
 
 module "rds" {
   source = "./modules/rds"
 
-  db_subnet_ids = [
-    module.vpc.private_subnet_ids["ap-northeast-1a"],
-    module.vpc.private_subnet_ids["ap-northeast-1c"],
-  ]
+  db_subnet_ids           = [for az, id in module.vpc.private_subnet_ids : id]
   vpc_id                  = module.vpc.vpc_id
   vpc_security_group_ids  = [module.security_group.rds_security_group_id]
   db_name                 = var.db_name
@@ -60,7 +32,7 @@ module "rds" {
   kms_key_id              = var.kms_key_id
 
   tags = {
-    Name = "basic_db"
+    Name = var.db_name
   }
 }
 

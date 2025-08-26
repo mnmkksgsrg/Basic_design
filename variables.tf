@@ -10,6 +10,18 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
+variable "public_subnets" {
+  description = "パブリックサブネットのCIDRとAZ"
+  type        = map(object({ cidr_block = string }))
+  default     = {}
+}
+
+variable "private_subnets" {
+  description = "プライベートサブネットのCIDRとAZ"
+  type        = map(object({ cidr_block = string }))
+  default     = {}
+}
+
 variable "ec2_ami_most_recent" {
   description = "EC2インスタンスで使用する最新のAMIを検索するかどうか"
   type        = bool
