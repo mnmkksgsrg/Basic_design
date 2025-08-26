@@ -19,17 +19,10 @@ module "rds" {
   source = "./modules/rds"
 
   db_subnet_ids           = [for az, id in module.vpc.private_subnet_ids : id]
-  vpc_id                  = module.vpc.vpc_id
   vpc_security_group_ids  = [module.security_group.rds_security_group_id]
   db_name                 = var.db_name
   db_username             = var.db_username
   db_password             = var.db_password
-  engine_version          = var.db_engine_version
-  instance_class          = var.db_instance_class
-  allocated_storage       = var.db_allocated_storage
-  db_parameter_group_name = var.db_parameter_group_name
-  skip_final_snapshot     = var.skip_final_snapshot
-  kms_key_id              = var.kms_key_id
 
   tags = {
     Name = var.db_name

@@ -1,16 +1,5 @@
-variable "project" {
-  description = "PJ名"
-  type        = string
-  default     = "basic"
-}
-
 variable "db_name" {
   description = "RDSデータベース名"
-  type        = string
-}
-
-variable "vpc_id" {
-  description = "VPCID"
   type        = string
 }
 
@@ -56,7 +45,7 @@ variable "allocated_storage" {
 variable "storage_type" {
   description = "ストレージタイプ"
   type        = string
-  default     = "gp2"
+  default     = "gp3"
 }
 
 variable "instance_class" {
@@ -114,10 +103,12 @@ variable "enable_performance_insights" {
 variable "db_parameter_group_name" {
   description = "DBパラメータグループ名"
   type        = string
+  default     = null
 }
 
 variable "tags" {
   description = "共通タグ"
   type        = map(string)
+  default     = {}
 }
 
