@@ -10,15 +10,15 @@ variable "vpc_cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "public_subnets" {
-  description = "パブリックサブネットのマップ"
-  type        = map(object({ cidr_block = string }))
-}
-
-variable "private_subnets" {
-  description = "プライベートサブネットのマップ"
-  type        = map(object({ cidr_block = string }))
-}
+#variable "public_subnets" {
+#  description = "パブリックサブネットのマップ"
+#  type        = map(object({ cidr_block = string }))
+#}
+#
+#variable "private_subnets" {
+#  description = "プライベートサブネットのマップ"
+#  type        = map(object({ cidr_block = string }))
+#}
 
 variable "ec2_ami_most_recent" {
   description = "EC2インスタンスで使用する最新のAMIを検索するかどうか"
@@ -50,8 +50,8 @@ variable "ec2_instance_type" {
   default     = "t3.micro"
 }
 
-variable "ec2_name_tag" {
-  description = "EC2インスタンスの名前タグ"
+variable "ec2_name" {
+  description = "EC2インスタンス名"
   type        = string
   default     = "basic_ec2"
 }

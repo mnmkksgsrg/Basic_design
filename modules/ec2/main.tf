@@ -14,7 +14,7 @@ data "aws_ami" "ubuntu" {
   owners = var.ami_owners
 }
 
-resource "aws_instance" "basic" {
+resource "aws_instance" "this" {
   ami                    = data.aws_ami.ubuntu.id
   instance_type          = var.instance_type
   subnet_id              = var.subnet_id
@@ -22,7 +22,6 @@ resource "aws_instance" "basic" {
   key_name               = var.key_name
 
   tags = {
-    Name = var.name
+    Name = var.ec2_name
   }
 }
-

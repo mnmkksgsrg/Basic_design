@@ -1,16 +1,16 @@
 variable "project" {
   description = "PJ名"
-  type = string
-  default = "basic"
+  type        = string
+  default     = "basic"
 }
 
-variable "name" {
-  description = "RDS名のプレフィックス"
+variable "db_name" {
+  description = "RDSデータベース名"
   type        = string
 }
 
 variable "vpc_id" {
-  description = "VPC ID"
+  description = "VPCID"
   type        = string
 }
 
@@ -20,14 +20,9 @@ variable "db_subnet_ids" {
 }
 
 variable "vpc_security_group_ids" {
-  description = "RDSに付与する追加セキュリティグループID"
+  description = "RDSに付与するセキュリティグループID"
   type        = list(string)
-  default = []
-}
-
-variable "db_name" {
-  description = "RDSデータベース名"
-  type        = string
+  default     = []
 }
 
 variable "db_username" {
@@ -44,13 +39,13 @@ variable "db_password" {
 variable "engine" {
   description = "RDSエンジン"
   type        = string
-  default = "mysql"
+  default     = "mysql"
 }
 
 variable "engine_version" {
   description = "RDSエンジンバージョン"
   type        = string
-  default = "8.0"
+  default     = "8.0"
 }
 
 variable "allocated_storage" {
@@ -61,7 +56,7 @@ variable "allocated_storage" {
 variable "storage_type" {
   description = "ストレージタイプ"
   type        = string
-  default = "gp2"
+  default     = "gp2"
 }
 
 variable "instance_class" {
@@ -72,37 +67,37 @@ variable "instance_class" {
 variable "multi_az" {
   description = "マルチAZ"
   type        = bool
-  default = false
+  default     = false
 }
 
 variable "publicly_accessible" {
   description = "パブリックアクセス可否"
   type        = bool
-  default = false
+  default     = false
 }
 
 variable "backup_retention_period" {
   description = "バックアップ保持日数"
   type        = number
-  default = 7
+  default     = 7
 }
 
 variable "skip_final_snapshot" {
   description = "削除時に最終スナップショットをスキップ"
   type        = bool
-  default = true
+  default     = true
 }
 
 variable "deletion_protection" {
   description = "削除保護"
   type        = bool
-  default = false
+  default     = false
 }
 
 variable "storage_encrypted" {
   description = "ストレージ暗号化"
   type        = bool
-  default = false
+  default     = false
 }
 
 variable "kms_key_id" {
@@ -113,7 +108,7 @@ variable "kms_key_id" {
 variable "enable_performance_insights" {
   description = "パフォーマンス情報"
   type        = bool
-  default = false
+  default     = false
 }
 
 variable "db_parameter_group_name" {

@@ -1,23 +1,23 @@
 variable "vpc_name" {
   description = "VPC名"
-  type = string
-  default = "default_vpc"
+  type        = string
+  default     = "default_vpc"
 }
 
 variable "vpc_cidr" {
   description = "VPCのCIDRブロック"
-  type = string
+  type        = string
 }
 
 variable "public_subnets" {
-  description = "パブリックサブネットのマップ"
-  type = map(object({ cidr_block = string }))
-  default = {}
+  description = "パブリックサブネットのCIDRとAZ"
+  type        = map(object({ cidr_block = string }))
+  default     = {}
 }
 
 variable "private_subnets" {
-  description = "プライベートサブネットのマップ"
-  type = map(object({ cidr_block = string }))
-  default = {}
+  description = "プライベートサブネットのCIDRとAZ"
+  type        = map(object({ cidr_block = string }))
+  default     = {}
 }
 

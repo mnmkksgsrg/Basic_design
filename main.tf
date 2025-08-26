@@ -36,14 +36,13 @@ module "ec2" {
   instance_type           = var.ec2_instance_type
   subnet_id               = module.vpc.public_subnet_ids["ap-northeast-1a"]
   security_group_ids      = [module.security_group.web_security_group_id]
-  name                    = var.ec2_name_tag
+  ec2_name                = var.ec2_name
   key_name                = var.ec2_key_name
 }
 
 module "rds" {
   source = "./modules/rds"
 
-  name = "basic"
   db_subnet_ids = [
     module.vpc.private_subnet_ids["ap-northeast-1a"],
     module.vpc.private_subnet_ids["ap-northeast-1c"],

@@ -1,37 +1,37 @@
 variable "ami_most_recent" {
   description = "最新のamiを使用するか"
   type        = bool
-  default = true
+  default     = true
 }
 
 variable "ami_name_pattern" {
   description = "AMIの名前パターン"
   type        = string
-  default = "amzn2-ami-hvm-*-x86_64-gp2"
+  default     = "amzn2-ami-hvm-*-x86_64-gp2"
 }
 
 variable "ami_virtualization_type" {
   description = "AMIの仮想化タイプ"
   type        = string
-  default = "hvm"
+  default     = "hvm"
 }
 
 variable "ami_owners" {
-  description = "ownerのID"
+  description = "AMIのownerID"
   type        = list(string)
-  default = ["amazon"]
+  default     = ["amazon"]
 }
 
 variable "instance_type" {
   description = "インスタンスタイプ"
   type        = string
-  default = "t3.micro"
+  default     = "t3.micro"
 }
 
 variable "key_name" {
   description = "EC2インスタンスで使用するキーペア名"
   type        = string
-  default = ""
+  default     = ""
 }
 
 variable "subnet_id" {
@@ -42,11 +42,11 @@ variable "subnet_id" {
 variable "security_group_ids" {
   description = "EC2インスタンスに付与するセキュリティグループID"
   type        = list(string)
-  default = []
+  default     = []
 }
 
-variable "name" {
-  description = "EC2インスタンス名（Nameタグ）"
+variable "ec2_name" {
+  description = "EC2インスタンス名"
   type        = string
 }
 
