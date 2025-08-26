@@ -55,6 +55,7 @@ variable "ec2_associate_public_ip" {
 variable "ec2_key_name" {
   description = "EC2インスタンスで使用するキーペアの名前"
   type        = string
+  default     = null
 }
 
 variable "db_name" {

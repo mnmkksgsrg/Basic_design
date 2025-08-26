@@ -31,7 +31,7 @@ variable "instance_type" {
 variable "key_name" {
   description = "EC2インスタンスで使用するキーペア名"
   type        = string
-  default     = ""
+  default     = null
 }
 
 variable "subnet_id" {
