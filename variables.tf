@@ -25,7 +25,6 @@ variable "private_subnets" {
 }
 
 
-
 ###EC2###
 
 variable "ec2_name" {
