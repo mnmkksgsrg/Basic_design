@@ -19,10 +19,10 @@ module "rds" {
   source = "./modules/rds"
 
   db_name                = var.db_name
-  db_subnet_ids          = [for az, id in module.vpc.private_subnet_ids : id]
-  vpc_security_group_ids = [module.security_group.rds_security_group_id]
   db_username            = var.db_username
   db_password            = var.db_password
+  db_subnet_ids          = [for az, id in module.vpc.private_subnet_ids : id]
+  vpc_security_group_ids = [module.security_group.rds_security_group_id]
 
   tags = {
     Name = var.db_name

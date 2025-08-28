@@ -3,17 +3,6 @@ variable "db_name" {
   type        = string
 }
 
-variable "db_subnet_ids" {
-  description = "RDSを配置するプライベートサブネットIDリスト"
-  type        = list(string)
-}
-
-variable "vpc_security_group_ids" {
-  description = "RDSに付与するセキュリティグループID"
-  type        = list(string)
-  default     = []
-}
-
 variable "db_username" {
   description = "RDSユーザー名"
   type        = string
@@ -37,6 +26,12 @@ variable "engine_version" {
   default     = "8.0"
 }
 
+variable "instance_class" {
+  description = "インスタンスクラス"
+  type        = string
+  default     = "db.t3.micro"
+}
+
 variable "allocated_storage" {
   description = "ストレージサイズ(GB)"
   type        = number
@@ -49,10 +44,15 @@ variable "storage_type" {
   default     = "gp3"
 }
 
-variable "instance_class" {
-  description = "インスタンスクラス"
-  type        = string
-  default     = "db.t3.micro"
+variable "db_subnet_ids" {
+  description = "RDSを配置するプライベートサブネットIDリスト"
+  type        = list(string)
+}
+
+variable "vpc_security_group_ids" {
+  description = "RDSに付与するセキュリティグループID"
+  type        = list(string)
+  default     = []
 }
 
 variable "multi_az" {
