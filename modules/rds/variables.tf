@@ -40,6 +40,7 @@ variable "engine_version" {
 variable "allocated_storage" {
   description = "ストレージサイズ(GB)"
   type        = number
+  default     = 20
 }
 
 variable "storage_type" {
@@ -51,6 +52,7 @@ variable "storage_type" {
 variable "instance_class" {
   description = "インスタンスクラス"
   type        = string
+  default     = "db.t3.micro"
 }
 
 variable "multi_az" {
@@ -92,6 +94,7 @@ variable "storage_encrypted" {
 variable "kms_key_id" {
   description = "KMSキーID"
   type        = string
+  default     = null
 }
 
 variable "enable_performance_insights" {

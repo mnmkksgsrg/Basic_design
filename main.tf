@@ -9,7 +9,7 @@ module "vpc" {
 
 module "ec2" {
   source = "./modules/ec2"
-  
+
   ec2_name           = var.ec2_name
   subnet_id          = values(module.vpc.public_subnet_ids)[0]
   security_group_ids = [module.security_group.web_security_group_id]
@@ -18,11 +18,11 @@ module "ec2" {
 module "rds" {
   source = "./modules/rds"
 
-  db_name                 = var.db_name
-  db_subnet_ids           = [for az, id in module.vpc.private_subnet_ids : id]
-  vpc_security_group_ids  = [module.security_group.rds_security_group_id]dddd
-  db_username             = var.db_username
-  db_password             = var.db_password
+  db_name                = var.db_name
+  db_subnet_ids          = [for az, id in module.vpc.private_subnet_ids : id]
+  vpc_security_group_ids = [module.security_group.rds_security_group_id]
+  db_username            = var.db_username
+  db_password            = var.db_password
 
   tags = {
     Name = var.db_name
